@@ -4,7 +4,7 @@ public class ArgumentFetcher
 {
     public Argument[] ValidArguments;
 
-    private static readonly Argument HelpArg = new(["-h", "--help"], 0, "Print this help text.");
+    private static readonly Argument HelpArg = new(new []{"-h", "--help"}, 0, "Print this help text.");
 
     public ArgumentFetcher(IEnumerable<Argument> arguments)
     {
