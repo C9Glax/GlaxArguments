@@ -4,6 +4,10 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Description>Defines and Parses Arguments for programs.</Description>
+        <PackageProjectUrl>https://github.com/C9Glax/GlaxArguments</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/C9Glax/GlaxArguments</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
 </Project>
