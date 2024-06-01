@@ -15,13 +15,12 @@ public class ArgumentFetcher
         ValidArguments = temp.Concat(new[] { HelpArg }).ToArray();
     }
 
-    public Dictionary<Argument, string[]> Fetch(string argumentString)
+    public Dictionary<Argument, string[]> Fetch(string[] args)
     {
         Dictionary<Argument, string[]> ret = new();
-        string[] parts = argumentString.Split(' ');
-        for (int i = 0; i < parts.Length; i++)
+        for (int i = 0; i < args.Length; i++)
         {
-            string flag = parts[i];
+            string flag = args[i];
             if(flag.Length < 1)
                 continue;
             if (!(flag.StartsWith('-') && flag.Length == 2 || flag.StartsWith("--"))) 
@@ -37,13 +36,13 @@ public class ArgumentFetcher
             }
             
             int lastParameterIndex = i + argument.ParameterCount;
-            if(lastParameterIndex >= parts.Length)
+            if(lastParameterIndex >= args.Length)
                 throw new ArgumentException($"Not enough Parameters provided for flag {flag}. (Expected {argument.ParameterCount})");
             
             List<string> parameters = new();
             for (; i < lastParameterIndex; i++)
             {
-                string param = parts[i + 1];
+                string param = args[i + 1];
                 if(param.StartsWith('-'))
                     throw new ArgumentException($"Not enough Parameters provided for flag {flag}. (Expected {argument.ParameterCount})");
                 if(param.StartsWith('"') && param.EndsWith('"'))
@@ -54,5 +53,10 @@ public class ArgumentFetcher
             ret.Add(argument, parameters.ToArray());
         }
         return ret;
+    }
+
+    public Dictionary<Argument, string[]> Fetch(string argumentString)
+    {
+        return Fetch(argumentString.Split(' '));
     }
 }
